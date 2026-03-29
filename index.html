@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>엄마와 뉴욕 & DC 여행 🗽</title>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F8F3EC;
+    --warm-white: #FDF9F4;
+    --ink: #1A1410;
+    --bark: #6B4E35;
+    --clay: #C4714A;
+    --sage: #7A9E7E;
+    --dusty-rose: #C9897A;
+    --gold: #C9A84C;
+    --muted: #9A8878;
+    --light-line: #E8DDD3;
+    --nyc: #C4714A;
+    --dc: #7A9E7E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(196,113,74,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(122,158,126,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at 60% 80%, rgba(201,137,122,0.12) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.0;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title em { font-style: italic; color: var(--clay); }
+
+  .hero-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-style: italic;
+    color: rgba(248,243,236,0.55);
+    margin-top: 16px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-dates {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .date-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .date-pill.nyc { background: rgba(196,113,74,0.2); border: 1px solid rgba(196,113,74,0.4); color: #E8A882; }
+  .date-pill.dc  { background: rgba(122,158,126,0.2); border: 1px solid rgba(122,158,126,0.4); color: #9EC6A3; }
+
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.nyc { background: var(--clay); }
+  .dot.dc  { background: var(--sage); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(248,243,236,0.3);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(248,243,236,0.3), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ── ACCOMMODATION BANNER ── */
+  .accom-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 24px;
+  }
+  .accom-banner.nyc {
+    background: rgba(196,113,74,0.08);
+    border: 1px solid rgba(196,113,74,0.2);
+    color: var(--bark);
+  }
+  .accom-banner.dc {
+    background: rgba(122,158,126,0.08);
+    border: 1px solid rgba(122,158,126,0.2);
+    color: #3D6B42;
+  }
+  .accom-icon { font-size: 20px; flex-shrink: 0; }
+  .accom-label { font-weight: 600; margin-bottom: 2px; }
+  .accom-addr { opacity: 0.75; font-size: 12px; }
+
+  .accom-row {
+    max-width: 900px;
+    margin: 32px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 24px;
+  }
+  @media(max-width:600px){ .accom-row { grid-template-columns:1fr; } }
+
+  /* ── COMMUTE CHIP ── */
+  .commute-bar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px 0;
+  }
+  .commute-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(201,168,76,0.10);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: #7A5C10;
+    margin-bottom: 4px;
+    margin-right: 6px;
+  }
+
+  /* ── CITY SECTION HEADER ── */
+  .city-header {
+    position: relative;
+    padding: 64px 24px 36px;
+    overflow: hidden;
+  }
+  .city-header.nyc-header { background: linear-gradient(135deg, #FDF3ED 0%, var(--cream) 100%); }
+  .city-header.dc-header  { background: linear-gradient(135deg, #EEF5EE 0%, var(--cream) 100%); }
+
+  .city-header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .city-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .city-label.nyc { color: var(--clay); }
+  .city-label.dc  { color: var(--sage); }
+
+  .city-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .city-name em { font-style: italic; }
+
+  .city-desc {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 340px;
+    line-height: 1.7;
+  }
+
+  .city-divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--light-line), transparent);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── DAY BLOCK ── */
+  .day-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .day-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .day-number-block {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+  }
+  .day-number-block.nyc-day { background: rgba(196,113,74,0.1); border: 1px solid rgba(196,113,74,0.2); }
+  .day-number-block.dc-day  { background: rgba(122,158,126,0.1); border: 1px solid rgba(122,158,126,0.2); }
+
+  .day-num { font-size: 22px; font-weight: 700; line-height: 1; }
+  .day-num.nyc-day { color: var(--clay); }
+  .day-num.dc-day  { color: var(--sage); }
+  .day-word { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+  .day-title-area { flex: 1; }
+  .day-date-tag { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .day-date-tag.nyc { color: var(--clay); }
+  .day-date-tag.dc  { color: var(--sage); }
+
+  .day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .day-commute {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ── STOP CARDS ── */
+  .stops-list { display: flex; flex-direction: column; }
+
+  .stop-item {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0 16px;
+    position: relative;
+  }
+
+  .stop-time-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 22px;
+  }
+
+  .stop-time { font-size: 11px; font-weight: 500; color: var(--muted); white-space: nowrap; margin-bottom: 6px; }
+
+  .stop-dot {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--cream);
+    flex-shrink: 0; z-index: 1;
+  }
+  .stop-dot.nyc { border-color: var(--clay); }
+  .stop-dot.dc  { border-color: var(--sage); }
+  .stop-dot.hl  { background: var(--clay); }
+  .stop-dot.hl.dc { background: var(--sage); }
+
+  .stop-line { width: 1px; flex: 1; min-height: 20px; }
+  .stop-line.nyc { background: rgba(196,113,74,0.2); }
+  .stop-line.dc  { background: rgba(122,158,126,0.2); }
+
+  .stop-card {
+    background: var(--warm-white);
+    border: 1px solid var(--light-line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin: 10px 0;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .stop-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px; border-radius: 3px 0 0 3px;
+  }
+  .stop-card.nyc::before { background: var(--clay); }
+  .stop-card.dc::before  { background: var(--sage); }
+  .stop-card.banksy::before { background: var(--ink); }
+  .stop-card.transit::before { background: var(--gold); }
+
+  .stop-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+  .stop-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+  }
+
+  .stop-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .stop-badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .badge-museum  { background: rgba(196,113,74,0.10); color: var(--clay); }
+  .badge-museum-dc { background: rgba(122,158,126,0.12); color: #4A7E50; }
+  .badge-cafe    { background: rgba(201,168,76,0.12); color: #9A7A2C; }
+  .badge-shop    { background: rgba(201,137,122,0.12); color: #A05242; }
+  .badge-park    { background: rgba(122,158,126,0.12); color: #4A7E50; }
+  .badge-market  { background: rgba(106,78,53,0.10); color: var(--bark); }
+  .badge-street  { background: rgba(26,20,16,0.10); color: var(--ink); }
+  .badge-transit { background: rgba(201,168,76,0.12); color: #8A6A1C; }
+
+  .stop-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .stop-tip {
+    margin-top: 10px;
+    padding: 9px 13px;
+    background: rgba(201,168,76,0.08);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 12px;
+    color: #8A6A1C;
+    line-height: 1.5;
+  }
+  .stop-tip::before { content: '✦  '; }
+
+  .stop-alert {
+    margin-top: 10px;
+    padding: 9px 13px;
+    background: rgba(196,113,74,0.07);
+    border-left: 2px solid var(--clay);
+    border-radius: 0 8px 8px 0;
+    font-size: 12px;
+    color: var(--bark);
+    line-height: 1.5;
+  }
+
+  /* transit divider inside stops */
+  .transit-stop .stop-card {
+    background: rgba(201,168,76,0.05);
+    border-style: dashed;
+    border-color: rgba(201,168,76,0.3);
+  }
+
+  /* ── TRANSITION CARD (Amtrak) ── */
+  .transition-wrap {
+    background: var(--ink);
+    padding: 48px 24px;
+  }
+  .transition-card {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .train-visual {
+    flex-shrink: 0;
+    width: 68px; height: 68px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .train-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .train-info p { font-size: 13px; color: rgba(248,243,236,0.45); line-height: 1.6; }
+  .train-route { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+  .route-city { font-size: 13px; font-weight: 600; }
+  .route-city.from { color: #E8A882; }
+  .route-city.to   { color: #9EC6A3; }
+  .route-arrow {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--clay), var(--sage));
+    position: relative;
+  }
+  .route-arrow::after {
+    content: '→';
+    position: absolute; right: -4px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--sage); font-size: 12px;
+    background: var(--ink);
+  }
+
+  /* ── TIPS ── */
+  .tips-section { background: var(--ink); padding: 64px 24px; }
+  .tips-inner { max-width: 900px; margin: 0 auto; }
+  .tips-header {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .tips-header em { color: var(--gold); font-style: italic; }
+  .tips-sub { font-size: 11px; color: rgba(248,243,236,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 44px; }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+  .tip-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .tip-icon { font-size: 22px; margin-bottom: 12px; }
+  .tip-title { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--cream); margin-bottom: 7px; }
+  .tip-text { font-size: 12px; color: rgba(248,243,236,0.45); line-height: 1.7; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .footer-text { font-family: 'DM Serif Display', serif; font-size: 14px; font-style: italic; color: rgba(248,243,236,0.25); }
+  .footer-hearts { color: var(--clay); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+
+  @media(max-width:600px){
+    .stop-item { grid-template-columns: 56px 1fr; gap: 0 10px; }
+    .stop-card { padding: 14px 16px; }
+    .city-header-inner { flex-direction: column; }
+    .transition-card { flex-direction: column; text-align: center; }
+    .train-route { justify-content: center; }
+  }
+
+
+
+
+  /* ══ MAP SECTION ══ */
+  .map-section { background: var(--ink); }
+  .map-header  { max-width: 900px; margin: 0 auto; padding: 52px 24px 28px; }
+  .map-eyebrow { font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px; }
+  .map-title   { font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:var(--cream);line-height:1.1; }
+  .map-title em{ color:var(--clay);font-style:italic; }
+  .day-tabs    { display:flex;gap:6px;flex-wrap:wrap;padding:0 24px 20px;max-width:900px;margin:0 auto; }
+  .day-tab     { display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(248,243,236,.45);transition:all .18s;white-space:nowrap; }
+  .day-tab:hover{ border-color:rgba(255,255,255,.22);color:rgba(248,243,236,.8); }
+  .day-tab.active.nyc-tab{ background:rgba(196,113,74,.18);border-color:rgba(196,113,74,.5);color:#E8A882; }
+  .day-tab.active.dc-tab { background:rgba(122,158,126,.18);border-color:rgba(122,158,126,.5);color:#9EC6A3; }
+  .tab-dot  { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
+  .nyc-tab .tab-dot{ background:var(--clay); }
+  .dc-tab  .tab-dot{ background:var(--sage); }
+  .map-layout  { display:grid;grid-template-columns:1fr 320px;border-top:1px solid rgba(255,255,255,.07); }
+  @media(max-width:760px){ .map-layout{ grid-template-columns:1fr; } }
+  #trip-map    { height:520px; }
+  .map-panel   { background:rgba(16,10,4,.98);border-left:1px solid rgba(255,255,255,.07);height:520px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent; }
+  .panel-day-title{ padding:18px 18px 10px;border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:0;background:rgba(16,10,4,.99);z-index:2; }
+  .panel-day-title span{ font-size:10px;color:var(--gold);font-weight:500;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:3px; }
+  .panel-day-name{ font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--cream);line-height:1.3; }
+  .panel-stop-list{ padding:6px 0; }
+  .panel-stop { display:flex;align-items:flex-start;gap:10px;padding:10px 18px;cursor:pointer;transition:background .14s;border-left:3px solid transparent; }
+  .panel-stop:hover{ background:rgba(255,255,255,.04); }
+  .panel-stop.active.nyc-ps{ border-left-color:var(--clay);background:rgba(196,113,74,.08); }
+  .panel-stop.active.dc-ps { border-left-color:var(--sage);background:rgba(122,158,126,.08); }
+  .panel-num  { flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px; }
+  .nyc-ps .panel-num{ background:rgba(196,113,74,.2);color:var(--clay);border:1px solid rgba(196,113,74,.35); }
+  .dc-ps  .panel-num{ background:rgba(122,158,126,.2);color:var(--sage);border:1px solid rgba(122,158,126,.35); }
+  .tr-ps  .panel-num{ background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3); }
+  .panel-stop-name{ font-size:12px;font-weight:500;color:rgba(248,243,236,.85);line-height:1.3; }
+  .panel-stop-meta{ font-size:11px;color:rgba(248,243,236,.32);margin-top:2px; }
+  .panel-divider  { height:1px;background:rgba(255,255,255,.05);margin:2px 18px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-tag">Mother & Daughter Trip · May 2025</p>
+  <h1 class="hero-title">New York<br><em>& D.C.</em></h1>
+  <p class="hero-subtitle">미술관, 카페, 그리고 엄마와 함께</p>
+  <div class="hero-dates">
+    <div class="date-pill nyc"><div class="dot nyc"></div> 뉴욕 · May 13–15</div>
+    <div class="date-pill dc"><div class="dot dc"></div> 워싱턴 D.C. · May 16–18</div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<!-- ══ INTERACTIVE MAP SECTION ══ -->
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<section class="map-section">
+  <div class="map-header">
+    <div class="map-eyebrow">6 days · 2 cities · 20+ places</div>
+    <h2 class="map-title">전체 여행 <em>루트 한눈에</em></h2>
+  </div>
+  <div class="day-tabs">
+    <button class="day-tab nyc-tab active" onclick="switchDay('nyc1')"><div class="tab-dot"></div>Day 1 · Met &amp; 센트럴파크</button>
+    <button class="day-tab nyc-tab" onclick="switchDay('nyc2')"><div class="tab-dot"></div>Day 2 · MoMA &amp; 소호</button>
+    <button class="day-tab nyc-tab" onclick="switchDay('nyc3')"><div class="tab-dot"></div>Day 3 · Whitney &amp; 첼시</button>
+    <button class="day-tab dc-tab"  onclick="switchDay('dc4')"><div class="tab-dot"></div>Day 4 · DC 도착일</button>
+    <button class="day-tab dc-tab"  onclick="switchDay('dc5')"><div class="tab-dot"></div>Day 5 · 조지타운 &amp; 스미소니언</button>
+    <button class="day-tab dc-tab"  onclick="switchDay('dc6')"><div class="tab-dot"></div>Day 6 · 뒤퐁서클 &amp; 몰</button>
+  </div>
+  <div class="map-layout">
+    <div id="trip-map"></div>
+    <div class="map-panel" id="map-panel"></div>
+  </div>
+</section>
+
+<script>
+const DAYS = {
+  nyc1:{label:'Day 1 · 5/13 화',sub:'The Met & 센트럴파크',city:'nyc',center:[-73.968,40.778],zoom:13.5,stops:[
+    {n:1,name:'Lincoln Harbor 페리 탑승',time:'09:10',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'The Metropolitan Museum of Art',time:'10:00',type:'미술관',lng:-73.9632,lat:40.7794},
+    {n:3,name:'센트럴파크 — 베데스다 분수',time:'13:30',type:'공원',lng:-73.9702,lat:40.7738},
+    {n:4,name:'어퍼 이스트 저녁 식사',time:'저녁',type:'맛집',lng:-73.9590,lat:40.7760},
+  ]},
+  nyc2:{label:'Day 2 · 5/14 수',sub:'MoMA · 뱅크시 · 소호',city:'nyc',center:[-73.993,40.740],zoom:13.5,stops:[
+    {n:1,name:'페리 → 39th St 탑승',time:'09:30',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'MoMA — 현대미술관',time:'10:30',type:'미술관',lng:-73.9776,lat:40.7614},
+    {n:3,name:'The Banksy Museum',time:'13:30',type:'스트리트아트',lng:-74.0014,lat:40.7194},
+    {n:4,name:'MoMA Design Store 소호점',time:'15:30',type:'소품샵',lng:-73.9980,lat:40.7230},
+    {n:5,name:'Caffe Paradiso',time:'17:00',type:'카페',lng:-73.9943,lat:40.7220},
+    {n:6,name:'The Lost Draft',time:'18:30',type:'카페',lng:-73.9972,lat:40.7208},
+  ]},
+  nyc3:{label:'Day 3 · 5/15 목',sub:'Whitney · 하이라인 · 첼시',city:'nyc',center:[-74.006,40.736],zoom:14,stops:[
+    {n:1,name:'페리 → 강변 도보 이동',time:'09:50',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'Whitney Museum of American Art',time:'10:30',type:'미술관',lng:-74.0089,lat:40.7396},
+    {n:3,name:'The High Line',time:'12:30',type:'공원',lng:-74.0048,lat:40.7480},
+    {n:4,name:'Chelsea Market',time:'13:30',type:'마켓',lng:-74.0061,lat:40.7424},
+    {n:5,name:'Urban Backyard',time:'15:30',type:'카페',lng:-73.9966,lat:40.7208},
+  ]},
+  dc4:{label:'Day 4 · 5/16 목',sub:'DC 도착 & National Gallery',city:'dc',center:[-77.012,38.900],zoom:13,stops:[
+    {n:1,name:'Union Station → 숙소 체크인',time:'12:30',type:'이동',lng:-77.0062,lat:38.8973,transit:true},
+    {n:2,name:'National Gallery of Art',time:'14:00',type:'미술관',lng:-77.0200,lat:38.8913},
+    {n:3,name:'maman — Union Market점',time:'17:00',type:'카페',lng:-76.9993,lat:38.9092},
+    {n:4,name:'Union Market — 저녁 식사',time:'18:00',type:'마켓',lng:-76.9976,lat:38.9085},
+  ]},
+  dc5:{label:'Day 5 · 5/17 금',sub:'조지타운 쇼핑 & 스미소니언',city:'dc',center:[-77.043,38.899],zoom:12.5,stops:[
+    {n:1,name:'LiLi The First — Georgetown',time:'10:00',type:'부티크',lng:-77.0639,lat:38.9090},
+    {n:2,name:'Curated by Cecilia',time:'11:15',type:'부티크',lng:-77.0627,lat:38.9065},
+    {n:3,name:'조지타운 → 내셔널 몰 이동',time:'12:30',type:'이동',lng:-77.0400,lat:38.9000,transit:true},
+    {n:4,name:'Smithsonian American Art Museum',time:'13:30',type:'미술관',lng:-77.0231,lat:38.8979},
+    {n:5,name:'Hirshhorn Museum',time:'15:30',type:'현대미술관',lng:-77.0230,lat:38.8882},
+  ]},
+  dc6:{label:'Day 6 · 5/18 토',sub:'뒤퐁서클 카페 & National Mall',city:'dc',center:[-77.040,38.899],zoom:13,stops:[
+    {n:1,name:'Dupont Coffee Collective',time:'09:00',type:'카페',lng:-77.0438,lat:38.9113},
+    {n:2,name:'뒤퐁서클 동네 산책',time:'10:00',type:'산책',lng:-77.0432,lat:38.9096},
+    {n:3,name:'National Mall — 작별 산책',time:'11:00',type:'명소',lng:-77.0364,lat:38.8875},
+  ]},
+};
+
+const C_NYC='#C4714A', C_DC='#7A9E7E', C_TR='#C9A84C';
+const TYPE_EMOJI={'미술관':'🎨','현대미술관':'🖼️','카페':'☕','소품샵':'🛍️','부티크':'🛍️','공원':'🌿','마켓':'🏪','이동':'🚌','맛집':'🍽️','스트리트아트':'🎭','명소':'🏛️','산책':'🚶'};
+let activeDay='nyc1', map, markers=[], popup;
+
+function initMap(){
+  map = new maplibregl.Map({
+    container:'trip-map',
+    style:'https://tiles.openfreemap.org/styles/dark',
+    center:[-73.968,40.778],
+    zoom:13.5,
+    attributionControl:false,
+  });
+  map.addControl(new maplibregl.AttributionControl({compact:true}));
+  map.addControl(new maplibregl.NavigationControl({showCompass:false}), 'bottom-right');
+  popup = new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:25,className:'ml-popup'});
+
+  map.on('load', ()=>{
+    map.addSource('route',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:[]}}});
+    map.addLayer({id:'route-line',type:'line',source:'route',paint:{
+      'line-color':['get','color'],
+      'line-width':2.5,
+      'line-opacity':0.65,
+      'line-dasharray':[3,3],
+    }});
+    renderDay('nyc1');
+  });
+}
+
+// Custom marker element
+function makeMarkerEl(n, color){
+  const el = document.createElement('div');
+  el.style.cssText=`width:32px;height:40px;cursor:pointer;position:relative`;
+  el.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+    <filter id="ds"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.45)"/></filter>
+    <path d="M16 0C7.163 0 0 7.163 0 16c0 10.5 16 24 16 24s16-13.5 16-24C32 7.163 24.837 0 16 0z" fill="${color}" filter="url(#ds)"/>
+    <circle cx="16" cy="15" r="9" fill="rgba(0,0,0,0.25)"/>
+    <text x="16" y="19.5" text-anchor="middle" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="white">${n}</text>
+  </svg>`;
+  return el;
+}
+
+function clearMarkers(){
+  markers.forEach(m=>m.remove());
+  markers=[];
+  popup.remove();
+}
+
+function renderDay(dayKey){
+  clearMarkers();
+  const d=DAYS[dayKey];
+  const color = d.city==='nyc'? C_NYC : C_DC;
+
+  // Update route line
+  const coords = d.stops.map(s=>[s.lng,s.lat]);
+  if(map.getSource('route')){
+    map.getSource('route').setData({
+      type:'Feature',
+      properties:{color},
+      geometry:{type:'LineString',coordinates:coords}
+    });
+  }
+
+  // Add markers
+  d.stops.forEach((s,i)=>{
+    const mc = s.transit? C_TR : color;
+    const el = makeMarkerEl(s.n, mc);
+
+    el.addEventListener('mouseenter', ()=>{
+      popup.setLngLat([s.lng,s.lat])
+        .setHTML(`<div style="font-family:'DM Sans',sans-serif;padding:10px 12px;min-width:170px">
+          <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#C9A84C;margin-bottom:4px">${TYPE_EMOJI[s.type]||'📍'} ${s.type}</div>
+          <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:#F8F3EC;line-height:1.35;margin-bottom:3px">${s.name}</div>
+          <div style="font-size:11px;color:rgba(248,243,236,0.45)">🕐 ${s.time}</div>
+        </div>`)
+        .addTo(map);
+      highlightPanel(i);
+    });
+    el.addEventListener('mouseleave', ()=>{ popup.remove(); });
+    el.addEventListener('click', ()=>{
+      map.flyTo({center:[s.lng,s.lat],zoom:16,duration:800,essential:true});
+      highlightPanel(i);
+      document.querySelector(`.panel-stop[data-idx="${i}"]`)?.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+
+    markers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat([s.lng,s.lat]).addTo(map));
+  });
+
+  // Fly to bounds
+  const lngs=d.stops.map(s=>s.lng), lats=d.stops.map(s=>s.lat);
+  const bounds=[[Math.min(...lngs)-.01,Math.min(...lats)-.008],[Math.max(...lngs)+.01,Math.max(...lats)+.008]];
+  map.fitBounds(bounds,{padding:{top:60,bottom:60,left:60,right:60},duration:900,essential:true});
+
+  renderPanel(dayKey);
+}
+
+function highlightPanel(idx){
+  document.querySelectorAll('.panel-stop').forEach((el,i)=>{
+    el.classList.toggle('active',i===idx);
+  });
+}
+
+function renderPanel(dayKey){
+  const d=DAYS[dayKey];
+  const isNyc=d.city==='nyc';
+  const psCls=isNyc?'nyc-ps':'dc-ps';
+  let html=`<div class="panel-day-title">
+    <span>${isNyc?'🗽 New York':'🏛️ Washington D.C.'}</span>
+    <div class="panel-day-name">${d.label}<br><span style="font-size:12px;font-weight:400;font-family:'DM Sans',sans-serif;color:rgba(248,243,236,0.45)">${d.sub}</span></div>
+  </div><div class="panel-stop-list">`;
+  d.stops.forEach((s,i)=>{
+    const cls=s.transit?'tr-ps':psCls;
+    html+=`<div class="panel-stop ${cls} ${psCls}" data-idx="${i}" onclick="focusStop(${i})">
+      <div class="panel-num">${s.n}</div>
+      <div>
+        <div class="panel-stop-name">${s.name}</div>
+        <div class="panel-stop-meta">${s.time} · ${TYPE_EMOJI[s.type]||'📍'} ${s.type}</div>
+      </div>
+    </div>${i<d.stops.length-1?'<div class="panel-divider"></div>':''}`;
+  });
+  html+='</div>';
+  document.getElementById('map-panel').innerHTML=html;
+}
+
+function focusStop(idx){
+  const s=DAYS[activeDay].stops[idx];
+  map.flyTo({center:[s.lng,s.lat],zoom:16,duration:800,essential:true});
+  highlightPanel(idx);
+  popup.setLngLat([s.lng,s.lat])
+    .setHTML(`<div style="font-family:'DM Sans',sans-serif;padding:10px 12px;min-width:170px">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#C9A84C;margin-bottom:4px">${TYPE_EMOJI[s.type]||'📍'} ${s.type}</div>
+      <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:#F8F3EC;line-height:1.35;margin-bottom:3px">${s.name}</div>
+      <div style="font-size:11px;color:rgba(248,243,236,0.45)">🕐 ${s.time}</div>
+    </div>`)
+    .addTo(map);
+}
+
+function switchDay(dayKey){
+  activeDay=dayKey;
+  document.querySelectorAll('.day-tab').forEach(btn=>{
+    btn.classList.toggle('active', btn.getAttribute('onclick')===`switchDay('${dayKey}')`);
+  });
+  if(map && map.loaded()) renderDay(dayKey);
+  else map?.on('load',()=>renderDay(dayKey));
+}
+
+// MapLibre popup style injection
+const st=document.createElement('style');
+st.textContent=`.maplibregl-popup-content{background:rgba(22,14,8,0.97)!important;border:1px solid rgba(255,255,255,0.12)!important;border-radius:10px!important;padding:0!important;box-shadow:0 6px 24px rgba(0,0,0,0.5)!important;}
+.maplibregl-popup-tip{border-top-color:rgba(22,14,8,0.97)!important;border-bottom-color:rgba(22,14,8,0.97)!important;}
+.maplibregl-ctrl-attrib{background:rgba(16,10,4,0.8)!important;color:rgba(248,243,236,0.3)!important;font-size:9px!important;}
+.maplibregl-ctrl-attrib a{color:rgba(248,243,236,0.35)!important;}
+.maplibregl-ctrl button{background:rgba(30,20,10,0.9)!important;border:1px solid rgba(255,255,255,0.12)!important;}
+.maplibregl-ctrl button .maplibregl-ctrl-icon{filter:invert(0.8)!important;}`;
+document.head.appendChild(st);
+
+initMap();
+</script>
+
+
+
+
+
+
+</body>
+</html>
