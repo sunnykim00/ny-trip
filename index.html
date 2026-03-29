@@ -599,7 +599,7 @@
   <div class="day-tabs">
     <button class="day-tab nyc-tab active" onclick="switchDay('nyc1')"><div class="tab-dot"></div>Day 1 · Met &amp; 센트럴파크</button>
     <button class="day-tab nyc-tab" onclick="switchDay('nyc2')"><div class="tab-dot"></div>Day 2 · MoMA &amp; 소호</button>
-    <button class="day-tab nyc-tab" onclick="switchDay('nyc3')"><div class="tab-dot"></div>Day 3 · Whitney &amp; 첼시</button>
+    <button class="day-tab nyc-tab" onclick="switchDay('nyc3')"><div class="tab-dot"></div>Day 3 · 자유의 여신상 &amp; Whitney</button>
     <button class="day-tab dc-tab"  onclick="switchDay('dc4')"><div class="tab-dot"></div>Day 4 · DC 도착일</button>
     <button class="day-tab dc-tab"  onclick="switchDay('dc5')"><div class="tab-dot"></div>Day 5 · 조지타운 &amp; 스미소니언</button>
     <button class="day-tab dc-tab"  onclick="switchDay('dc6')"><div class="tab-dot"></div>Day 6 · 뒤퐁서클 &amp; 몰</button>
@@ -628,13 +628,15 @@ const DAYS = {
     {n:6,name:'Caffe Paradiso',time:'17:00',type:'카페',lng:-73.9943,lat:40.7220},
     {n:7,name:'The Lost Draft',time:'18:30',type:'카페',lng:-73.9972,lat:40.7208},
   ]},
-  nyc3:{label:'Day 3 · 5/15 목',sub:'Whitney · 하이라인 · 첼시',city:'nyc',center:[-74.006,40.736],zoom:14,stops:[
-    {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'09:40',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
-    {n:2,name:'페리 → 강변 도보 이동',time:'09:50',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
-    {n:3,name:'Whitney Museum of American Art',time:'10:30',type:'미술관',lng:-74.0089,lat:40.7396},
-    {n:4,name:'The High Line',time:'12:30',type:'공원',lng:-74.0048,lat:40.7480},
-    {n:5,name:'Chelsea Market',time:'13:30',type:'마켓',lng:-74.0061,lat:40.7424},
-    {n:6,name:'Urban Backyard',time:'15:30',type:'카페',lng:-73.9966,lat:40.7208},
+  nyc3:{label:'Day 3 · 5/15 목',sub:'자유의 여신상 · Whitney · 하이라인',city:'nyc',center:[-74.013,40.710],zoom:12,stops:[
+    {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'08:30',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'Whitehall Terminal 이동',time:'09:00',type:'이동',lng:-74.0131,lat:40.7013,transit:true},
+    {n:3,name:'스태튼 아일랜드 페리 — 자유의 여신상 감상',time:'09:30',type:'명소',lng:-74.0445,lat:40.6892},
+    {n:4,name:'Whitehall Terminal 복귀',time:'10:30',type:'이동',lng:-74.0131,lat:40.7013,transit:true},
+    {n:5,name:'Whitney Museum of American Art',time:'11:30',type:'미술관',lng:-74.0089,lat:40.7396},
+    {n:6,name:'The High Line',time:'13:30',type:'공원',lng:-74.0048,lat:40.7480},
+    {n:7,name:'Chelsea Market',time:'14:30',type:'마켓',lng:-74.0061,lat:40.7424},
+    {n:8,name:'Urban Backyard',time:'16:00',type:'카페',lng:-73.9966,lat:40.7208},
   ]},
   dc4:{label:'Day 4 · 5/16 목',sub:'DC 도착 & National Gallery',city:'dc',center:[-77.012,38.900],zoom:13,stops:[
     {n:1,name:'Union Station 도착',time:'12:00',type:'이동',lng:-77.0062,lat:38.8973,transit:true},
@@ -943,37 +945,50 @@ initMap();
     </div>
     <div class="day-title-area">
       <div class="day-date-tag nyc">5월 15일 목요일</div>
-      <h3 class="day-title">Whitney · 하이라인 · 첼시마켓</h3>
+      <h3 class="day-title">자유의 여신상 · Whitney · 하이라인</h3>
     </div>
   </div>
   <div class="stops-list">
     <div class="stop-item transit-stop">
-      <div class="stop-time-col"><div class="stop-time">09:40</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
-      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발 → 강변 도보 이동</div><span class="stop-badge badge-transit">이동</span></div>
-        <div class="stop-note">Lincoln Harbor에서 페리 또는 도보로 이동.</div>
+      <div class="stop-time-col"><div class="stop-time">08:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">오늘은 좀 일찍! Lincoln Harbor에서 맨해튼 남쪽 Whitehall Terminal로 이동.</div>
       </div>
     </div>
     <div class="stop-item">
-      <div class="stop-time-col"><div class="stop-time">10:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-time-col"><div class="stop-time">09:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">🗽 스태튼 아일랜드 페리 — 자유의 여신상</div><span class="stop-badge badge-museum">명소</span></div>
+        <div class="stop-note">무료 페리를 타고 자유의 여신상 바로 옆을 지나가요! 상륙하지 않고 왕복하면 약 50분. 오른쪽 자리를 잡으면 사진 찍기 좋아요.</div>
+        <div class="stop-tip">완전 무료! 별도 예약 필요 없이 Whitehall Terminal에서 바로 탑승.</div>
+      </div>
+    </div>
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">10:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">Whitehall Terminal → Whitney 이동</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">페리에서 내려 지하철 1호선으로 Whitney까지 약 30분.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">11:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
       <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Whitney Museum of American Art</div><span class="stop-badge badge-museum">미술관</span></div>
         <div class="stop-note">미국 현대미술 전문. 에드워드 호퍼 컬렉션이 유명해요. 옥상 테라스에서 허드슨강 뷰도 꼭 보세요!</div>
         <div class="stop-tip">금요일 저녁 7~10시 Pay What You Wish. 목요일은 정상 운영 ($25).</div>
       </div>
     </div>
     <div class="stop-item">
-      <div class="stop-time-col"><div class="stop-time">12:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-time-col"><div class="stop-time">13:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
       <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">The High Line</div><span class="stop-badge badge-park">공원</span></div>
         <div class="stop-note">옛 철도 위에 만든 공중 정원. Whitney에서 바로 연결! 5월에 꽃과 녹음이 아름다워요. 천천히 걸으면서 건축물 구경.</div>
       </div>
     </div>
     <div class="stop-item">
-      <div class="stop-time-col"><div class="stop-time">13:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-time-col"><div class="stop-time">14:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
       <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Chelsea Market</div><span class="stop-badge badge-market">마켓</span></div>
         <div class="stop-note">하이라인 바로 아래! 다양한 음식과 소품샵이 가득. 랍스터, 타코, 빵집 등 점심 해결하기 딱 좋아요.</div>
       </div>
     </div>
     <div class="stop-item">
-      <div class="stop-time-col"><div class="stop-time">15:30</div><div class="stop-dot nyc"></div></div>
+      <div class="stop-time-col"><div class="stop-time">16:00</div><div class="stop-dot nyc"></div></div>
       <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Urban Backyard</div><span class="stop-badge badge-cafe">카페</span></div>
         <div class="stop-note">빈티지 감성 카페. 하루의 마무리를 여유롭게.</div>
       </div>
