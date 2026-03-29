@@ -598,7 +598,7 @@
   </div>
   <div class="day-tabs">
     <button class="day-tab nyc-tab active" onclick="switchDay('nyc1')"><div class="tab-dot"></div>Day 1 · Met &amp; 센트럴파크</button>
-    <button class="day-tab nyc-tab" onclick="switchDay('nyc2')"><div class="tab-dot"></div>Day 2 · MoMA &amp; 소호</button>
+    <button class="day-tab nyc-tab" onclick="switchDay('nyc2')"><div class="tab-dot"></div>Day 2 · NYPL &amp; MoMA &amp; 타임스퀘어</button>
     <button class="day-tab nyc-tab" onclick="switchDay('nyc3')"><div class="tab-dot"></div>Day 3 · 자유의 여신상 &amp; Whitney</button>
     <button class="day-tab dc-tab"  onclick="switchDay('dc4')"><div class="tab-dot"></div>Day 4 · DC 도착일</button>
     <button class="day-tab dc-tab"  onclick="switchDay('dc5')"><div class="tab-dot"></div>Day 5 · 조지타운 &amp; 스미소니언</button>
@@ -619,14 +619,15 @@ const DAYS = {
     {n:4,name:'센트럴파크 — 베데스다 분수',time:'13:30',type:'공원',lng:-73.9702,lat:40.7738},
     {n:5,name:'어퍼 이스트 저녁 식사',time:'저녁',type:'맛집',lng:-73.9590,lat:40.7760},
   ]},
-  nyc2:{label:'Day 2 · 5/14 수',sub:'MoMA · 뱅크시 · 소호',city:'nyc',center:[-73.993,40.740],zoom:13.5,stops:[
+  nyc2:{label:'Day 2 · 5/14 수',sub:'NYPL · MoMA · 소호 · 타임스퀘어',city:'nyc',center:[-73.993,40.740],zoom:12.5,stops:[
     {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'09:20',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
     {n:2,name:'페리 → 39th St 탑승',time:'09:30',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
-    {n:3,name:'MoMA — 현대미술관',time:'10:30',type:'미술관',lng:-73.9776,lat:40.7614},
-    {n:4,name:'The Banksy Museum',time:'13:30',type:'스트리트아트',lng:-74.0014,lat:40.7194},
-    {n:5,name:'MoMA Design Store 소호점',time:'15:30',type:'소품샵',lng:-73.9980,lat:40.7230},
-    {n:6,name:'Caffe Paradiso',time:'17:00',type:'카페',lng:-73.9943,lat:40.7220},
-    {n:7,name:'The Lost Draft',time:'18:30',type:'카페',lng:-73.9972,lat:40.7208},
+    {n:3,name:'New York Public Library',time:'10:00',type:'명소',lng:-73.9822,lat:40.7532},
+    {n:4,name:'MoMA — 현대미술관',time:'11:00',type:'미술관',lng:-73.9776,lat:40.7614},
+    {n:5,name:'The Banksy Museum',time:'13:30',type:'스트리트아트',lng:-74.0014,lat:40.7194},
+    {n:6,name:'MoMA Design Store 소호점',time:'15:30',type:'소품샵',lng:-73.9980,lat:40.7230},
+    {n:7,name:'Caffe Paradiso',time:'17:00',type:'카페',lng:-73.9943,lat:40.7220},
+    {n:8,name:'Times Square',time:'20:00',type:'명소',lng:-73.9855,lat:40.7580},
   ]},
   nyc3:{label:'Day 3 · 5/15 목',sub:'자유의 여신상 · Whitney · 하이라인',city:'nyc',center:[-74.013,40.710],zoom:12,stops:[
     {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'08:30',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
@@ -892,7 +893,7 @@ initMap();
     </div>
     <div class="day-title-area">
       <div class="day-date-tag nyc">5월 14일 수요일</div>
-      <h3 class="day-title">MoMA · 뱅크시 · 소호 골목 탐험</h3>
+      <h3 class="day-title">NYPL · MoMA · 소호 · 타임스퀘어</h3>
     </div>
   </div>
   <div class="stops-list">
@@ -903,9 +904,16 @@ initMap();
       </div>
     </div>
     <div class="stop-item">
-      <div class="stop-time-col"><div class="stop-time">10:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-time-col"><div class="stop-time">10:00</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">New York Public Library</div><span class="stop-badge badge-museum">명소</span></div>
+        <div class="stop-note">보자르 양식의 웅장한 건축물. 1층 로즈 메인 열람실은 꼭 보세요! 무료 입장이고 약 40분이면 충분해요. 정문 앞 사자상에서 인생샷도 찍으세요.</div>
+        <div class="stop-tip">무료 입장! MoMA까지 도보 10분 거리예요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">11:00</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
       <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">MoMA — 현대미술관</div><span class="stop-badge badge-museum">미술관</span></div>
-        <div class="stop-note">고흐 별이 빛나는 밤, 모네 수련, 앤디 워홀까지. 현대미술 거장들을 한자리에서. 약 2~3시간 추천.</div>
+        <div class="stop-note">고흐 별이 빛나는 밤, 모네 수련, 앤디 워홀까지. 현대미술 거장들을 한자리에서. 약 2시간 추천.</div>
         <div class="stop-tip">금요일 오후 4시 이후 무료 입장! 수요일은 정상 운영 ($25).</div>
       </div>
     </div>
@@ -924,13 +932,13 @@ initMap();
     <div class="stop-item">
       <div class="stop-time-col"><div class="stop-time">17:00</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
       <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Caffe Paradiso</div><span class="stop-badge badge-cafe">카페</span></div>
-        <div class="stop-note">소호 감성 이탈리안 카페. 라떼와 티라미수가 유명해요.</div>
+        <div class="stop-note">소호 감성 이탈리안 카페. 라떼와 티라미수가 유명해요. 여유롭게 저녁 전 쉬어가기.</div>
       </div>
     </div>
     <div class="stop-item">
-      <div class="stop-time-col"><div class="stop-time">18:30</div><div class="stop-dot nyc"></div></div>
-      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">The Lost Draft</div><span class="stop-badge badge-cafe">카페</span></div>
-        <div class="stop-note">소호 뒷골목 숨겨진 카페. 여유로운 저녁 시간을 보내기 좋아요.</div>
+      <div class="stop-time-col"><div class="stop-time">20:00</div><div class="stop-dot nyc hl"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">✨ Times Square</div><span class="stop-badge badge-museum">명소</span></div>
+        <div class="stop-note">밤이 진짜 타임스퀘어! 네온사인과 거대한 광고판이 만드는 뉴욕의 상징적인 야경. 사진 찍고 분위기 즐기기. 근처에서 간단히 저녁 해결해도 좋아요.</div>
       </div>
     </div>
   </div>
