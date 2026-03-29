@@ -613,48 +613,54 @@
 <script>
 const DAYS = {
   nyc1:{label:'Day 1 · 5/13 화',sub:'The Met & 센트럴파크',city:'nyc',center:[-73.968,40.778],zoom:13.5,stops:[
-    {n:1,name:'Lincoln Harbor 페리 탑승',time:'09:10',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
-    {n:2,name:'The Metropolitan Museum of Art',time:'10:00',type:'미술관',lng:-73.9632,lat:40.7794},
-    {n:3,name:'센트럴파크 — 베데스다 분수',time:'13:30',type:'공원',lng:-73.9702,lat:40.7738},
-    {n:4,name:'어퍼 이스트 저녁 식사',time:'저녁',type:'맛집',lng:-73.9590,lat:40.7760},
+    {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'09:00',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'Lincoln Harbor 페리 탑승',time:'09:10',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
+    {n:3,name:'The Metropolitan Museum of Art',time:'10:00',type:'미술관',lng:-73.9632,lat:40.7794},
+    {n:4,name:'센트럴파크 — 베데스다 분수',time:'13:30',type:'공원',lng:-73.9702,lat:40.7738},
+    {n:5,name:'어퍼 이스트 저녁 식사',time:'저녁',type:'맛집',lng:-73.9590,lat:40.7760},
   ]},
   nyc2:{label:'Day 2 · 5/14 수',sub:'MoMA · 뱅크시 · 소호',city:'nyc',center:[-73.993,40.740],zoom:13.5,stops:[
-    {n:1,name:'페리 → 39th St 탑승',time:'09:30',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
-    {n:2,name:'MoMA — 현대미술관',time:'10:30',type:'미술관',lng:-73.9776,lat:40.7614},
-    {n:3,name:'The Banksy Museum',time:'13:30',type:'스트리트아트',lng:-74.0014,lat:40.7194},
-    {n:4,name:'MoMA Design Store 소호점',time:'15:30',type:'소품샵',lng:-73.9980,lat:40.7230},
-    {n:5,name:'Caffe Paradiso',time:'17:00',type:'카페',lng:-73.9943,lat:40.7220},
-    {n:6,name:'The Lost Draft',time:'18:30',type:'카페',lng:-73.9972,lat:40.7208},
+    {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'09:20',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'페리 → 39th St 탑승',time:'09:30',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
+    {n:3,name:'MoMA — 현대미술관',time:'10:30',type:'미술관',lng:-73.9776,lat:40.7614},
+    {n:4,name:'The Banksy Museum',time:'13:30',type:'스트리트아트',lng:-74.0014,lat:40.7194},
+    {n:5,name:'MoMA Design Store 소호점',time:'15:30',type:'소품샵',lng:-73.9980,lat:40.7230},
+    {n:6,name:'Caffe Paradiso',time:'17:00',type:'카페',lng:-73.9943,lat:40.7220},
+    {n:7,name:'The Lost Draft',time:'18:30',type:'카페',lng:-73.9972,lat:40.7208},
   ]},
   nyc3:{label:'Day 3 · 5/15 목',sub:'Whitney · 하이라인 · 첼시',city:'nyc',center:[-74.006,40.736],zoom:14,stops:[
-    {n:1,name:'페리 → 강변 도보 이동',time:'09:50',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
-    {n:2,name:'Whitney Museum of American Art',time:'10:30',type:'미술관',lng:-74.0089,lat:40.7396},
-    {n:3,name:'The High Line',time:'12:30',type:'공원',lng:-74.0048,lat:40.7480},
-    {n:4,name:'Chelsea Market',time:'13:30',type:'마켓',lng:-74.0061,lat:40.7424},
-    {n:5,name:'Urban Backyard',time:'15:30',type:'카페',lng:-73.9966,lat:40.7208},
+    {n:1,name:'숙소 출발 (Lincoln Harbor)',time:'09:40',type:'숙소',lng:-74.0227,lat:40.7587,transit:true},
+    {n:2,name:'페리 → 강변 도보 이동',time:'09:50',type:'이동',lng:-74.0227,lat:40.7587,transit:true},
+    {n:3,name:'Whitney Museum of American Art',time:'10:30',type:'미술관',lng:-74.0089,lat:40.7396},
+    {n:4,name:'The High Line',time:'12:30',type:'공원',lng:-74.0048,lat:40.7480},
+    {n:5,name:'Chelsea Market',time:'13:30',type:'마켓',lng:-74.0061,lat:40.7424},
+    {n:6,name:'Urban Backyard',time:'15:30',type:'카페',lng:-73.9966,lat:40.7208},
   ]},
   dc4:{label:'Day 4 · 5/16 목',sub:'DC 도착 & National Gallery',city:'dc',center:[-77.012,38.900],zoom:13,stops:[
-    {n:1,name:'Union Station → 숙소 체크인',time:'12:30',type:'이동',lng:-77.0062,lat:38.8973,transit:true},
-    {n:2,name:'National Gallery of Art',time:'14:00',type:'미술관',lng:-77.0200,lat:38.8913},
-    {n:3,name:'maman — Union Market점',time:'17:00',type:'카페',lng:-76.9993,lat:38.9092},
-    {n:4,name:'Union Market — 저녁 식사',time:'18:00',type:'마켓',lng:-76.9976,lat:38.9085},
+    {n:1,name:'Union Station 도착',time:'12:00',type:'이동',lng:-77.0062,lat:38.8973,transit:true},
+    {n:2,name:'숙소 체크인',time:'12:30',type:'숙소',lng:-77.0320,lat:38.9050,transit:true},
+    {n:3,name:'National Gallery of Art',time:'14:00',type:'미술관',lng:-77.0200,lat:38.8913},
+    {n:4,name:'maman — Union Market점',time:'17:00',type:'카페',lng:-76.9993,lat:38.9092},
+    {n:5,name:'Union Market — 저녁 식사',time:'18:00',type:'마켓',lng:-76.9976,lat:38.9085},
   ]},
   dc5:{label:'Day 5 · 5/17 금',sub:'조지타운 쇼핑 & 스미소니언',city:'dc',center:[-77.043,38.899],zoom:12.5,stops:[
-    {n:1,name:'LiLi The First — Georgetown',time:'10:00',type:'부티크',lng:-77.0639,lat:38.9090},
-    {n:2,name:'Curated by Cecilia',time:'11:15',type:'부티크',lng:-77.0627,lat:38.9065},
-    {n:3,name:'조지타운 → 내셔널 몰 이동',time:'12:30',type:'이동',lng:-77.0400,lat:38.9000,transit:true},
-    {n:4,name:'Smithsonian American Art Museum',time:'13:30',type:'미술관',lng:-77.0231,lat:38.8979},
-    {n:5,name:'Hirshhorn Museum',time:'15:30',type:'현대미술관',lng:-77.0230,lat:38.8882},
+    {n:1,name:'숙소 출발',time:'09:30',type:'숙소',lng:-77.0320,lat:38.9050,transit:true},
+    {n:2,name:'LiLi The First — Georgetown',time:'10:00',type:'부티크',lng:-77.0639,lat:38.9090},
+    {n:3,name:'Curated by Cecilia',time:'11:15',type:'부티크',lng:-77.0627,lat:38.9065},
+    {n:4,name:'조지타운 → 내셔널 몰 이동',time:'12:30',type:'이동',lng:-77.0400,lat:38.9000,transit:true},
+    {n:5,name:'Smithsonian American Art Museum',time:'13:30',type:'미술관',lng:-77.0231,lat:38.8979},
+    {n:6,name:'Hirshhorn Museum',time:'15:30',type:'현대미술관',lng:-77.0230,lat:38.8882},
   ]},
   dc6:{label:'Day 6 · 5/18 토',sub:'뒤퐁서클 카페 & National Mall',city:'dc',center:[-77.040,38.899],zoom:13,stops:[
-    {n:1,name:'Dupont Coffee Collective',time:'09:00',type:'카페',lng:-77.0438,lat:38.9113},
-    {n:2,name:'뒤퐁서클 동네 산책',time:'10:00',type:'산책',lng:-77.0432,lat:38.9096},
-    {n:3,name:'National Mall — 작별 산책',time:'11:00',type:'명소',lng:-77.0364,lat:38.8875},
+    {n:1,name:'숙소 출발',time:'08:30',type:'숙소',lng:-77.0320,lat:38.9050,transit:true},
+    {n:2,name:'Dupont Coffee Collective',time:'09:00',type:'카페',lng:-77.0438,lat:38.9113},
+    {n:3,name:'뒤퐁서클 동네 산책',time:'10:00',type:'산책',lng:-77.0432,lat:38.9096},
+    {n:4,name:'National Mall — 작별 산책',time:'11:00',type:'명소',lng:-77.0364,lat:38.8875},
   ]},
 };
 
 const C_NYC='#C4714A', C_DC='#7A9E7E', C_TR='#C9A84C';
-const TYPE_EMOJI={'미술관':'🎨','현대미술관':'🖼️','카페':'☕','소품샵':'🛍️','부티크':'🛍️','공원':'🌿','마켓':'🏪','이동':'🚌','맛집':'🍽️','스트리트아트':'🎭','명소':'🏛️','산책':'🚶'};
+const TYPE_EMOJI={'미술관':'🎨','현대미술관':'🖼️','카페':'☕','소품샵':'🛍️','부티크':'🛍️','공원':'🌿','마켓':'🏪','이동':'🚌','맛집':'🍽️','스트리트아트':'🎭','명소':'🏛️','산책':'🚶','숙소':'🏠'};
 let activeDay='nyc1', map, markers=[], popup;
 
 function initMap(){
@@ -811,8 +817,347 @@ document.head.appendChild(st);
 initMap();
 </script>
 
+<!-- ══ NEW YORK CITY HEADER ══ -->
+<section class="city-header nyc-header">
+  <div class="city-header-inner">
+    <div>
+      <div class="city-label nyc">Day 1 – 3 · May 13–15</div>
+      <h2 class="city-name">New <em>York</em></h2>
+    </div>
+    <p class="city-desc">미술관부터 감성 카페, 예쁜 소품샵까지. 어퍼 이스트에서 소호까지 엄마가 좋아하는 것들로만 꽉 채웠어요.</p>
+  </div>
+</section>
+<div class="city-divider"></div>
 
+<!-- ACCOMMODATION -->
+<div class="accom-row">
+  <div class="accom-banner nyc">
+    <div class="accom-icon">🏠</div>
+    <div>
+      <div class="accom-label">숙소 · Lincoln Harbor</div>
+      <div class="accom-addr">Weehawken, NJ — 페리로 맨해튼 10분</div>
+    </div>
+  </div>
+</div>
 
+<!-- DAY 1 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-number-block nyc-day">
+      <div class="day-num nyc-day">1</div>
+      <div class="day-word">DAY</div>
+    </div>
+    <div class="day-title-area">
+      <div class="day-date-tag nyc">5월 13일 화요일</div>
+      <h3 class="day-title">The Met & 센트럴파크 — 어퍼 이스트</h3>
+    </div>
+  </div>
+  <div class="stops-list">
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">09:00</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발 → 페리 탑승</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">Lincoln Harbor에서 페리 탑승. 맨해튼까지 약 10분 소요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">10:00</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">The Metropolitan Museum of Art</div><span class="stop-badge badge-museum">미술관</span></div>
+        <div class="stop-note">세계 3대 박물관 중 하나. 이집트관, 인상파 회화관, 아시아 미술관이 압도적이에요. 최소 3시간은 잡으세요. 온라인 예약 필수 — 입장권 $30.</div>
+        <div class="stop-tip">수요일 휴관이에요. 화요일인 13일은 정상 운영!</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">13:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">센트럴파크 — 베데스다 분수 & 보우 브릿지</div><span class="stop-badge badge-park">공원</span></div>
+        <div class="stop-note">Met 바로 옆! 5월엔 꽃이 만발해 사진 찍기 최고예요. 베데스다 분수 → 보우 브릿지 코스 추천. 약 1시간 산책.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">저녁</div><div class="stop-dot nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">어퍼 이스트 근처에서 저녁 식사</div><span class="stop-badge badge-market">맛집</span></div>
+        <div class="stop-note">이 동네는 고급 레스토랑이 많아요. Cafe Boulud, Uva 등 분위기 좋은 곳들이 많으니 예약해두면 좋아요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 2 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-number-block nyc-day">
+      <div class="day-num nyc-day">2</div>
+      <div class="day-word">DAY</div>
+    </div>
+    <div class="day-title-area">
+      <div class="day-date-tag nyc">5월 14일 수요일</div>
+      <h3 class="day-title">MoMA · 뱅크시 · 소호 골목 탐험</h3>
+    </div>
+  </div>
+  <div class="stops-list">
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">09:20</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발 → 페리 탑승</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">Lincoln Harbor → 39th St 페리 탑승.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">10:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">MoMA — 현대미술관</div><span class="stop-badge badge-museum">미술관</span></div>
+        <div class="stop-note">고흐 별이 빛나는 밤, 모네 수련, 앤디 워홀까지. 현대미술 거장들을 한자리에서. 약 2~3시간 추천.</div>
+        <div class="stop-tip">금요일 오후 4시 이후 무료 입장! 수요일은 정상 운영 ($25).</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">13:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card banksy"><div class="stop-top"><div class="stop-name">The Banksy Museum</div><span class="stop-badge badge-street">스트리트아트</span></div>
+        <div class="stop-note">뱅크시의 대표작들을 모은 몰입형 전시. 풍자와 유머가 가득한 작품들이 인상적이에요. 약 1.5시간.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">15:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">MoMA Design Store 소호점</div><span class="stop-badge badge-shop">소품샵</span></div>
+        <div class="stop-note">디자인 소품, 아트 프린트, 유니크한 선물 가득. MoMA 감성 기념품 사기 좋은 곳!</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">17:00</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Caffe Paradiso</div><span class="stop-badge badge-cafe">카페</span></div>
+        <div class="stop-note">소호 감성 이탈리안 카페. 라떼와 티라미수가 유명해요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">18:30</div><div class="stop-dot nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">The Lost Draft</div><span class="stop-badge badge-cafe">카페</span></div>
+        <div class="stop-note">소호 뒷골목 숨겨진 카페. 여유로운 저녁 시간을 보내기 좋아요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 3 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-number-block nyc-day">
+      <div class="day-num nyc-day">3</div>
+      <div class="day-word">DAY</div>
+    </div>
+    <div class="day-title-area">
+      <div class="day-date-tag nyc">5월 15일 목요일</div>
+      <h3 class="day-title">Whitney · 하이라인 · 첼시마켓</h3>
+    </div>
+  </div>
+  <div class="stops-list">
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">09:40</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발 → 강변 도보 이동</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">Lincoln Harbor에서 페리 또는 도보로 이동.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">10:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Whitney Museum of American Art</div><span class="stop-badge badge-museum">미술관</span></div>
+        <div class="stop-note">미국 현대미술 전문. 에드워드 호퍼 컬렉션이 유명해요. 옥상 테라스에서 허드슨강 뷰도 꼭 보세요!</div>
+        <div class="stop-tip">금요일 저녁 7~10시 Pay What You Wish. 목요일은 정상 운영 ($25).</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">12:30</div><div class="stop-dot nyc"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">The High Line</div><span class="stop-badge badge-park">공원</span></div>
+        <div class="stop-note">옛 철도 위에 만든 공중 정원. Whitney에서 바로 연결! 5월에 꽃과 녹음이 아름다워요. 천천히 걸으면서 건축물 구경.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">13:30</div><div class="stop-dot nyc hl"></div><div class="stop-line nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Chelsea Market</div><span class="stop-badge badge-market">마켓</span></div>
+        <div class="stop-note">하이라인 바로 아래! 다양한 음식과 소품샵이 가득. 랍스터, 타코, 빵집 등 점심 해결하기 딱 좋아요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">15:30</div><div class="stop-dot nyc"></div></div>
+      <div class="stop-card nyc"><div class="stop-top"><div class="stop-name">Urban Backyard</div><span class="stop-badge badge-cafe">카페</span></div>
+        <div class="stop-note">빈티지 감성 카페. 하루의 마무리를 여유롭게.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AMTRAK TRANSITION ══ -->
+<div class="transition-wrap">
+  <div class="transition-card">
+    <div class="train-visual">🚄</div>
+    <div class="train-info">
+      <h3>Amtrak으로 워싱턴 D.C.로!</h3>
+      <p>Penn Station에서 Amtrak 탑승. 약 3시간 30분 소요. 창밖 풍경을 즐기며 편하게 이동하세요.</p>
+      <div class="train-route">
+        <span class="route-city from">New York</span>
+        <div class="route-arrow"></div>
+        <span class="route-city to">Washington D.C.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WASHINGTON D.C. HEADER ══ -->
+<section class="city-header dc-header">
+  <div class="city-header-inner">
+    <div>
+      <div class="city-label dc">Day 4 – 6 · May 16–18</div>
+      <h2 class="city-name">Washington <em>D.C.</em></h2>
+    </div>
+    <p class="city-desc">스미소니언 미술관, 조지타운 부티크, 뒤퐁서클 카페까지. 여유로운 수도의 매력을 느껴보세요.</p>
+  </div>
+</section>
+<div class="city-divider"></div>
+
+<!-- ACCOMMODATION DC -->
+<div class="accom-row">
+  <div class="accom-banner dc">
+    <div class="accom-icon">🏠</div>
+    <div>
+      <div class="accom-label">숙소 · Washington D.C.</div>
+      <div class="accom-addr">다운타운 DC — 내셔널 몰과 가까운 위치</div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-number-block dc-day">
+      <div class="day-num dc-day">4</div>
+      <div class="day-word">DAY</div>
+    </div>
+    <div class="day-title-area">
+      <div class="day-date-tag dc">5월 16일 금요일</div>
+      <h3 class="day-title">DC 도착 & National Gallery of Art</h3>
+    </div>
+  </div>
+  <div class="stops-list">
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">12:00</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🚄 Union Station 도착</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">Amtrak으로 워싱턴 DC 도착! 짐을 숙소에 맡기고 일정 시작.</div>
+      </div>
+    </div>
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">12:30</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 체크인</div><span class="stop-badge badge-transit">숙소</span></div>
+        <div class="stop-note">짐 정리하고 가볍게 준비.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">14:00</div><div class="stop-dot dc hl"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">National Gallery of Art</div><span class="stop-badge badge-museum-dc">미술관</span></div>
+        <div class="stop-note">무료 입장! 서관에는 르네상스~인상파, 동관에는 현대미술. 다빈치, 모네, 피카소까지 한곳에. 약 2~3시간 추천.</div>
+        <div class="stop-tip">무료 입장이에요! 스미소니언 계열 미술관은 모두 무료.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">17:00</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">maman — Union Market점</div><span class="stop-badge badge-cafe">카페</span></div>
+        <div class="stop-note">뉴욕에서 넘어온 인기 카페. 시그니처 라떼와 쿠키가 유명해요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">18:00</div><div class="stop-dot dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">Union Market — 저녁 식사</div><span class="stop-badge badge-market">마켓</span></div>
+        <div class="stop-note">다양한 음식 벤더가 있는 푸드홀. 타코, 라멘, 피자 등 취향대로 골라먹기 좋아요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 5 -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="day-number-block dc-day">
+      <div class="day-num dc-day">5</div>
+      <div class="day-word">DAY</div>
+    </div>
+    <div class="day-title-area">
+      <div class="day-date-tag dc">5월 17일 토요일</div>
+      <h3 class="day-title">조지타운 쇼핑 & 스미소니언 미술관</h3>
+    </div>
+  </div>
+  <div class="stops-list">
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">09:30</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">조지타운으로 이동. 버스 또는 택시 약 15분.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">10:00</div><div class="stop-dot dc hl"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">LiLi The First — Georgetown</div><span class="stop-badge badge-shop">부티크</span></div>
+        <div class="stop-note">조지타운의 감성 부티크. 독특한 패션 아이템과 액세서리를 만날 수 있어요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">11:15</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">Curated by Cecilia</div><span class="stop-badge badge-shop">부티크</span></div>
+        <div class="stop-note">감각적인 큐레이션 숍. 소품과 빈티지 아이템이 가득해요.</div>
+      </div>
+    </div>
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">12:30</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">조지타운 → 내셔널 몰 이동</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">조지타운에서 내셔널 몰까지 버스 또는 택시로 약 15분.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">13:30</div><div class="stop-dot dc hl"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">Smithsonian American Art Museum</div><span class="stop-badge badge-museum-dc">미술관</span></div>
+        <div class="stop-note">미국 미술사를 한눈에! 무료 입장. 건물 자체도 아름다워요. 약 2시간 추천.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">15:30</div><div class="stop-dot dc hl"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">Hirshhorn Museum</div><span class="stop-badge badge-museum-dc">현대미술관</span></div>
+        <div class="stop-note">원형 건물이 독특한 현대미술 전문관. 야외 조각 정원도 멋져요. 무료 입장.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 6 -->
+<section class="day-section" style="border-bottom:none;">
+  <div class="day-header">
+    <div class="day-number-block dc-day">
+      <div class="day-num dc-day">6</div>
+      <div class="day-word">DAY</div>
+    </div>
+    <div class="day-title-area">
+      <div class="day-date-tag dc">5월 18일 일요일</div>
+      <h3 class="day-title">뒤퐁서클 카페 & National Mall 작별 산책</h3>
+    </div>
+  </div>
+  <div class="stops-list">
+    <div class="stop-item transit-stop">
+      <div class="stop-time-col"><div class="stop-time">08:30</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card transit"><div class="stop-top"><div class="stop-name">🏠 숙소 출발</div><span class="stop-badge badge-transit">이동</span></div>
+        <div class="stop-note">마지막 날! 짐은 숙소에 맡기고 가볍게 출발.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">09:00</div><div class="stop-dot dc hl"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">Dupont Coffee Collective</div><span class="stop-badge badge-cafe">카페</span></div>
+        <div class="stop-note">뒤퐁서클의 로컬 스페셜티 카페. 여유로운 마지막 날 아침 커피 한 잔.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">10:00</div><div class="stop-dot dc"></div><div class="stop-line dc"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">뒤퐁서클 동네 산책</div><span class="stop-badge badge-park">산책</span></div>
+        <div class="stop-note">예쁜 타운하우스와 대사관이 늘어선 거리. 여유롭게 걸으며 DC의 마지막 순간을 즐기세요.</div>
+      </div>
+    </div>
+    <div class="stop-item">
+      <div class="stop-time-col"><div class="stop-time">11:00</div><div class="stop-dot dc hl"></div></div>
+      <div class="stop-card dc"><div class="stop-top"><div class="stop-name">National Mall — 작별 산책</div><span class="stop-badge badge-museum-dc">명소</span></div>
+        <div class="stop-note">워싱턴 기념탑, 링컨 기념관을 바라보며 마지막 산책. 엄마와 함께한 여행의 마무리.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
