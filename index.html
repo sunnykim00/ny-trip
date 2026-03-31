@@ -48,16 +48,16 @@
   .hero-bg {
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(196,113,74,0.1) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 30%, rgba(122,158,126,0.1) 0%, transparent 55%),
-      radial-gradient(ellipse at 60% 80%, rgba(201,137,122,0.08) 0%, transparent 50%);
+      radial-gradient(ellipse at 20% 50%, rgba(196,113,74,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(122,158,126,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse at 60% 80%, rgba(201,137,122,0.06) 0%, transparent 50%);
   }
 
   .hero-grid {
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(26,20,16,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(26,20,16,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(26,20,16,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,20,16,0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -67,42 +67,227 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--bark);
-    margin-bottom: 32px;
+    margin-bottom: 36px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
-  .hero-title {
+  /* ── 3D TICKET ── */
+  .ticket-perspective {
+    perspective: 900px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.6s;
+    margin-bottom: 48px;
+  }
+
+  .ticket-3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+    cursor: default;
+  }
+
+  .ticket {
+    position: relative;
+    width: min(520px, 85vw);
+    background: var(--warm-white);
+    border: 1.5px solid var(--light-line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 2px 8px rgba(107,78,53,0.06),
+      0 12px 40px rgba(107,78,53,0.1),
+      0 30px 80px rgba(107,78,53,0.06);
+    backface-visibility: hidden;
+  }
+
+
+  .ticket-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255,255,255,0.5) 0%,
+      rgba(255,255,255,0.15) 30%,
+      transparent 70%
+    );
+  }
+
+  .ticket-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px dashed var(--light-line);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .ticket-body {
+    padding: 28px 28px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .ticket-emoji {
+    font-size: 32px;
+    margin-bottom: 14px;
+  }
+
+  .ticket-main-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 8vw, 96px);
+    font-size: clamp(26px, 5vw, 38px);
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.0;
-    margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.4s;
+    line-height: 1.15;
+    margin-bottom: 6px;
   }
+  .ticket-main-title em { color: var(--clay); font-style: italic; }
 
-  .hero-title em { font-style: italic; color: var(--clay); }
-
-  .hero-subtitle {
+  .ticket-sub {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(18px, 2.5vw, 26px);
+    font-size: 15px;
     font-style: italic;
-    color: var(--muted);
-    margin-top: 16px;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.6s;
+    color: var(--clay);
+    letter-spacing: 1px;
   }
 
+  .ticket-tear {
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .ticket-tear::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 1.5px solid var(--light-line);
+    border-left: none;
+    box-shadow: -2px 0 4px rgba(0,0,0,0.02) inset;
+  }
+  .ticket-tear::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 1.5px solid var(--light-line);
+    border-right: none;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.02) inset;
+  }
+  .ticket-tear-line {
+    width: 100%;
+    border-top: 1.5px dashed var(--light-line);
+  }
+
+  .ticket-details {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    padding: 18px 28px 12px;
+    align-items: center;
+  }
+
+  .ticket-city {
+    text-align: center;
+  }
+  .ticket-city-code {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .ticket-city-code.nyc { color: var(--clay); }
+  .ticket-city-code.dc { color: var(--sage); }
+  .ticket-city-name {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .ticket-route {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--light-line);
+  }
+  .ticket-route-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, var(--clay), var(--sage));
+  }
+  .ticket-route-icon { font-size: 14px; color: var(--muted); }
+
+  .ticket-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 28px 16px;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .ticket-bottom-item { text-align: center; }
+  .ticket-bottom-label {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-line);
+    margin-bottom: 3px;
+  }
+  .ticket-bottom-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bark);
+  }
+
+  .ticket-barcode {
+    padding: 10px 28px 18px;
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+  .barcode-bar {
+    width: 2px;
+    border-radius: 1px;
+    background: var(--light-line);
+  }
+
+  .ticket-footer-text {
+    text-align: center;
+    padding: 0 28px 16px;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light-line);
+  }
+
+  /* ── DATE PILLS (below ticket) ── */
   .hero-dates {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
     opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.8s;
+    animation: fadeUp 0.8s ease forwards 1.0s;
   }
 
   .date-pill {
@@ -135,7 +320,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     opacity: 0;
-    animation: fadeUp 0.8s ease forwards 1.2s;
+    animation: fadeUp 0.8s ease forwards 1.4s;
   }
 
   .scroll-line {
@@ -424,6 +609,253 @@
     line-height: 1.5;
   }
 
+  /* ── DIARY TOGGLE ── */
+  .diary-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 6px 0 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light-line);
+    transition: color 0.2s;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .diary-toggle:hover { color: var(--muted); }
+  .diary-toggle-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 10px;
+  }
+  .diary-toggle.open .diary-toggle-arrow { transform: rotate(180deg); }
+  .diary-toggle .diary-count {
+    font-size: 9px;
+    background: rgba(196,113,74,0.1);
+    color: var(--clay);
+    padding: 1px 6px;
+    border-radius: 100px;
+  }
+
+  /* ── DIARY AREA ── */
+  .diary-area {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+  .diary-area.open {
+    opacity: 1;
+  }
+  .diary-inner {
+    padding-top: 14px;
+    border-top: 1px dashed var(--light-line);
+    margin-top: 12px;
+  }
+
+  .diary-photos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .polaroid {
+    background: #fff;
+    padding: 6px 6px 28px;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    transform: rotate(-1.5deg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .polaroid:nth-child(2) { transform: rotate(2deg); }
+  .polaroid:hover { transform: rotate(0deg) scale(1.03); box-shadow: 0 6px 20px rgba(0,0,0,0.12); z-index: 1; }
+
+  .polaroid img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 1px;
+    display: block;
+  }
+
+  .polaroid-caption {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    font-size: 9px;
+    color: var(--muted);
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .polaroid-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: #fff;
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+    border: none;
+    padding: 0;
+  }
+  .polaroid:hover .polaroid-remove { opacity: 1; }
+
+  .diary-add-btn {
+    width: 120px;
+    height: 124px;
+    border: 2px dashed var(--light-line);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--light-line);
+    font-size: 11px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+    background: transparent;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .diary-add-btn:hover { border-color: var(--muted); color: var(--muted); }
+  .diary-add-icon { font-size: 24px; line-height: 1; }
+  .diary-add-label { font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+
+  .diary-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .diary-comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .comment-author {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .comment-author.mom {
+    background: rgba(196,113,74,0.12);
+    color: var(--clay);
+  }
+  .comment-author.daughter {
+    background: rgba(122,158,126,0.12);
+    color: var(--sage);
+  }
+
+  .comment-text {
+    color: var(--bark);
+    font-style: italic;
+    font-family: 'DM Serif Display', serif;
+  }
+
+  .comment-remove {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--light-line);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+  .comment-remove:hover { color: var(--clay); }
+
+  .diary-add-comment {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--light-line);
+    cursor: pointer;
+    transition: color 0.2s;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .diary-add-comment:hover { color: var(--muted); }
+
+  .note-form {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .note-form select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    padding: 4px 8px;
+    border: 1px solid var(--light-line);
+    border-radius: 100px;
+    background: var(--warm-white);
+    color: var(--ink);
+    outline: none;
+  }
+  .note-form input {
+    flex: 1;
+    min-width: 120px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 5px 10px;
+    border: 1px solid var(--light-line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    outline: none;
+  }
+  .note-form input:focus { border-color: var(--clay); }
+  .note-form button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--clay);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .note-form button:hover { background: var(--bark); }
+
   /* transit divider inside stops */
   .transit-stop .stop-card {
     background: rgba(201,168,76,0.05);
@@ -575,18 +1007,127 @@
 <body>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <p class="hero-tag">Mother & Daughter Trip · May 2025</p>
-  <h1 class="hero-title">New York<br><em>& D.C.</em></h1>
-  <p class="hero-subtitle">미술관, 카페, 그리고 엄마와 함께</p>
+
+  <div class="ticket-perspective">
+    <div class="ticket-3d" id="ticket3d">
+      <div class="ticket">
+        <div class="ticket-glare" id="ticketGlare"></div>
+        <div class="ticket-top">
+          <span>Admit Two</span>
+          <span>✦</span>
+          <span>Boarding Pass</span>
+        </div>
+        <div class="ticket-body">
+          <div class="ticket-emoji">🗽</div>
+          <div class="ticket-main-title">New York <em>& D.C.</em></div>
+          <div class="ticket-sub">Museums, Cafés, with Mom</div>
+        </div>
+        <div class="ticket-tear"><div class="ticket-tear-line"></div></div>
+        <div class="ticket-details">
+          <div class="ticket-city">
+            <div class="ticket-city-code nyc">NYC</div>
+            <div class="ticket-city-name">New York</div>
+          </div>
+          <div class="ticket-route">
+            <div class="ticket-route-line"></div>
+            <div class="ticket-route-icon">✈</div>
+            <div class="ticket-route-line"></div>
+          </div>
+          <div class="ticket-city">
+            <div class="ticket-city-code dc">DCA</div>
+            <div class="ticket-city-name">Washington D.C.</div>
+          </div>
+        </div>
+        <div class="ticket-bottom">
+          <div class="ticket-bottom-item">
+            <div class="ticket-bottom-label">Date</div>
+            <div class="ticket-bottom-value">May 13 – 18</div>
+          </div>
+          <div class="ticket-bottom-item">
+            <div class="ticket-bottom-label">Passengers</div>
+            <div class="ticket-bottom-value">2</div>
+          </div>
+          <div class="ticket-bottom-item">
+            <div class="ticket-bottom-label">Duration</div>
+            <div class="ticket-bottom-value">6 Days</div>
+          </div>
+          <div class="ticket-bottom-item">
+            <div class="ticket-bottom-label">Class</div>
+            <div class="ticket-bottom-value">Mom & Me ♡</div>
+          </div>
+        </div>
+        <div class="ticket-barcode" id="ticketBarcode"></div>
+        <div class="ticket-footer-text">Valid for one unforgettable trip · 2025</div>
+      </div>
+    </div>
+  </div>
+
   <div class="hero-dates">
-    <div class="date-pill nyc"><div class="dot nyc"></div> 뉴욕 · May 13–15</div>
-    <div class="date-pill dc"><div class="dot dc"></div> 워싱턴 D.C. · May 16–18</div>
+    <div class="date-pill nyc"><div class="dot nyc"></div> New York · May 13–15</div>
+    <div class="date-pill dc"><div class="dot dc"></div> Washington D.C. · May 16–18</div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
 </section>
+
+<script>
+(function() {
+  const ticket = document.getElementById('ticket3d');
+  const glare = document.getElementById('ticketGlare');
+  const hero = document.getElementById('hero');
+
+  // Generate barcode
+  const barcodeEl = document.getElementById('ticketBarcode');
+  for (let i = 0; i < 40; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'barcode-bar';
+    const h = Math.random() * 16 + 12;
+    bar.style.height = h + 'px';
+    if (Math.random() > 0.5) bar.style.width = '3px';
+    barcodeEl.appendChild(bar);
+  }
+
+  const MAX_ROT_Y = 10;
+  const MAX_ROT_X = 6;
+
+  let rafId;
+  hero.addEventListener('mousemove', (e) => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      const rect = ticket.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      let dx = (e.clientX - cx) / (rect.width / 2);
+      let dy = (e.clientY - cy) / (rect.height / 2);
+      dx = Math.max(-1, Math.min(1, dx));
+      dy = Math.max(-1, Math.min(1, dy));
+
+      const rotY = dx * MAX_ROT_Y;
+      const rotX = -dy * MAX_ROT_X;
+
+      ticket.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+
+      const gx = ((e.clientX - rect.left) / rect.width) * 100;
+      const gy = ((e.clientY - rect.top) / rect.height) * 100;
+      glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)`;
+      glare.style.opacity = Math.min(Math.sqrt(dx*dx + dy*dy) * 0.55, 0.7);
+
+      rafId = null;
+    });
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    ticket.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    ticket.style.transition = 'transform 0.5s ease-out';
+    glare.style.opacity = 0;
+    setTimeout(() => { ticket.style.transition = 'transform 0.15s ease-out'; }, 500);
+  });
+})();
+</script>
 
 <!-- ══ INTERACTIVE MAP SECTION ══ -->
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
@@ -1183,6 +1724,166 @@ initMap();
 </section>
 
 
+<script>
+(function() {
+  const STORAGE_KEY = 'ny_trip_diary';
+
+  function loadDiary() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+  }
+  function saveDiary(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  let cardIdx = 0;
+  document.querySelectorAll('.stop-card').forEach(card => {
+    if (card.classList.contains('transit')) return;
+    const id = 'card_' + cardIdx++;
+    card.dataset.diaryId = id;
+
+    const data = loadDiary();
+    if (!data[id]) data[id] = { photos: [], comments: [] };
+
+    const toggle = document.createElement('button');
+    toggle.className = 'diary-toggle';
+    const count = data[id].photos.length + data[id].comments.length;
+    toggle.innerHTML = `<span class="diary-toggle-arrow">▼</span> Diary${count > 0 ? ` <span class="diary-count">${count}</span>` : ''}`;
+    card.appendChild(toggle);
+
+    const diary = document.createElement('div');
+    diary.className = 'diary-area';
+    diary.innerHTML = '<div class="diary-inner"><div class="diary-photos"></div><div class="diary-comments"></div></div>';
+    card.appendChild(diary);
+
+    toggle.addEventListener('click', () => {
+      const isOpen = diary.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      if (isOpen) {
+        diary.style.maxHeight = diary.scrollHeight + 200 + 'px';
+      } else {
+        diary.style.maxHeight = '0';
+      }
+    });
+
+    function renderCard() {
+      const d = loadDiary();
+      const cd = d[id] || { photos: [], comments: [] };
+      const photosEl = diary.querySelector('.diary-photos');
+      const commentsEl = diary.querySelector('.diary-comments');
+
+      let ph = '';
+      cd.photos.forEach((p, i) => {
+        ph += `<div class="polaroid"><img src="${p.src}" alt="${p.cap||''}"><div class="polaroid-caption">${p.cap||''}</div><button class="polaroid-remove" data-pi="${i}">×</button></div>`;
+      });
+      if (cd.photos.length < 2) {
+        ph += '<div class="diary-add-btn" data-action="add-photo"><div class="diary-add-icon">+</div><div class="diary-add-label">Photo</div></div>';
+      }
+      photosEl.innerHTML = ph;
+
+      let ch = '';
+      cd.comments.forEach((c, i) => {
+        ch += `<div class="diary-comment"><span class="comment-author ${c.author}">${c.author === 'mom' ? 'Mom' : 'Daughter'}</span><span class="comment-text">${c.text}</span><button class="comment-remove" data-ci="${i}">×</button></div>`;
+      });
+      ch += '<button class="diary-add-comment" data-action="add-note"><span>+</span> Add a note</button>';
+      commentsEl.innerHTML = ch;
+
+      const cnt = cd.photos.length + cd.comments.length;
+      toggle.innerHTML = `<span class="diary-toggle-arrow">▼</span> Diary${cnt > 0 ? ` <span class="diary-count">${cnt}</span>` : ''}`;
+
+      if (diary.classList.contains('open')) {
+        diary.style.maxHeight = diary.scrollHeight + 200 + 'px';
+      }
+    }
+
+    diary.addEventListener('click', (e) => {
+      const addPhoto = e.target.closest('[data-action="add-photo"]');
+      if (addPhoto) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = () => {
+          const file = input.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const max = 400;
+              let w = img.width, h = img.height;
+              if (w > max || h > max) {
+                if (w > h) { h = Math.round(h * max / w); w = max; }
+                else { w = Math.round(w * max / h); h = max; }
+              }
+              canvas.width = w; canvas.height = h;
+              canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+              const src = canvas.toDataURL('image/jpeg', 0.7);
+              const cap = prompt('Caption (optional):') || '';
+              const d = loadDiary();
+              if (!d[id]) d[id] = { photos: [], comments: [] };
+              d[id].photos.push({ src, cap });
+              saveDiary(d);
+              renderCard();
+            };
+            img.src = reader.result;
+          };
+          reader.readAsDataURL(file);
+        };
+        input.click();
+        return;
+      }
+
+      const rmPhoto = e.target.closest('.polaroid-remove');
+      if (rmPhoto) {
+        const pi = parseInt(rmPhoto.dataset.pi);
+        const d = loadDiary();
+        if (d[id]) { d[id].photos.splice(pi, 1); saveDiary(d); }
+        renderCard();
+        return;
+      }
+
+      const addNote = e.target.closest('[data-action="add-note"]');
+      if (addNote) {
+        const existing = diary.querySelector('.note-form');
+        if (existing) return;
+        const form = document.createElement('div');
+        form.className = 'note-form';
+        form.innerHTML = `<select><option value="mom">Mom</option><option value="daughter">Daughter</option></select><input type="text" placeholder="Write a short note..." maxlength="100"><button type="button">Add</button>`;
+        addNote.after(form);
+        const inp = form.querySelector('input');
+        inp.focus();
+        const submit = () => {
+          const text = inp.value.trim();
+          if (!text) return;
+          const author = form.querySelector('select').value;
+          const d = loadDiary();
+          if (!d[id]) d[id] = { photos: [], comments: [] };
+          d[id].comments.push({ author, text });
+          saveDiary(d);
+          renderCard();
+        };
+        form.querySelector('button').addEventListener('click', submit);
+        inp.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') submit(); });
+        if (diary.classList.contains('open')) {
+          diary.style.maxHeight = diary.scrollHeight + 200 + 'px';
+        }
+        return;
+      }
+
+      const rmComment = e.target.closest('.comment-remove');
+      if (rmComment) {
+        const ci = parseInt(rmComment.dataset.ci);
+        const d = loadDiary();
+        if (d[id]) { d[id].comments.splice(ci, 1); saveDiary(d); }
+        renderCard();
+        return;
+      }
+    });
+
+    renderCard();
+  });
+})();
+</script>
 
 </body>
 </html>
